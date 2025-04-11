@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Omerta Safehouse Calculator</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    img {
+      max-width: 150px;
+      margin-bottom: 20px;
+    }
+    input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 100px;
+      margin: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #666;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="https://www.barafranca.com/i/layout/logo.gif" alt="Omerta Logo" />
+  <h1>Omerta Safehouse Calculator</h1>
+  <p>Bereken je onderduik-kosten ($100 × min²)</p>
+
+  <div>
+    <input type="number" id="hoursInput" placeholder="Uren" min="1" />
+    <button onclick="calculate()">Bereken</button>
+  </div>
+
+  <div>
+    <button onclick="preset(6)">6 uur</button>
+    <button onclick="preset(12)">12 uur</button>
+    <button onclick="preset(24)">24 uur</button>
+    <button onclick="preset(48)">48 uur</button>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculate() {
+      const hours = parseInt(document.getElementById('hoursInput').value);
+      if (!isNaN(hours) && hours > 0) {
+        const minutes = hours * 60;
+        const price = 100 * Math.pow(minutes, 2);
+        document.getElementById('result').innerText =
+          `Kosten: $${price.toLocaleString()}`;
+      } else {
+        document.getElementById('result').innerText = 'Voer een geldig aantal uren in.';
+      }
+    }
+
+    function preset(hours) {
+      document.getElementById('hoursInput').value = hours;
+      calculate();
+    }
+  </script>
+
+</body>
+</html>
